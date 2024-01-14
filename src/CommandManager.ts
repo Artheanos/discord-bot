@@ -9,8 +9,6 @@ import { tmpSend } from 'utils/discord'
 import { HelpCommand } from 'commands/HelpCommand'
 import { BaseCommand } from 'commands/BaseCommand'
 
-// HelpCommand references `routes`, so it has to be added
-// after the `routes` have been initialized
 routes['help'] = HelpCommand
 
 
