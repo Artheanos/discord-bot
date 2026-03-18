@@ -1,4 +1,4 @@
-import { GuildExtension } from './GuildExtension'
+import { GuildExtension } from "./GuildExtension"
 
 export class GuildExtensionsManager {
     static guilds: Record<string, GuildExtension> = {}

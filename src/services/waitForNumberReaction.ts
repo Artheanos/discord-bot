@@ -1,7 +1,7 @@
-import { Message } from 'discord.js'
-import { awaitEmojiReaction, reactMultiple } from 'utils/discord'
+import { Message } from "discord.js"
+import { awaitEmojiReaction, reactMultiple } from "utils/discord"
 
-const EMOJI_NUMBERS = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣']
+const EMOJI_NUMBERS = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣"]
 
 const emojiToNumber = (emoji: string) => {
     return new TextEncoder().encode(emoji)[0] - 48

@@ -1,4 +1,4 @@
-import { Client } from 'discord.js'
+import { Client } from "discord.js"
 
 export abstract class BaseJob {
     constructor(protected client: Client) {

@@ -1,8 +1,8 @@
-import { BaseCommand } from './BaseCommand'
-import { GuildExtensionsManager } from 'lib/guildStorage'
+import { BaseCommand } from "./BaseCommand"
+import { GuildExtensionsManager } from "lib/guildStorage"
 
 export class ShutdownCommand extends BaseCommand {
-    static description = 'Stops the bot'
+    static description = "Stops the bot"
     static ownerOnly = true
 
     action() {

@@ -1,6 +1,6 @@
-import { AudioPlayerState, AudioPlayerStatus, createAudioResource } from '@discordjs/voice'
-import { AudioPlayerWrapper } from './AudioPlayerWrapper'
-import { QueuedTrack } from 'lib/guildStorage/types'
+import { AudioPlayerState, AudioPlayerStatus, createAudioResource } from "@discordjs/voice"
+import { AudioPlayerWrapper } from "./AudioPlayerWrapper"
+import { QueuedTrack } from "lib/guildStorage/types"
 
 export class TrackScheduler {
     queue: QueuedTrack[] = []

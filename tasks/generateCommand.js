@@ -1,6 +1,6 @@
-const fs = require('fs')
-const path = require('path')
-const { capitalize } = require('../src/utils/strings')
+const fs = require("fs")
+const path = require("path")
+const { capitalize } = require("../src/utils/strings")
 
 const template = (name) =>
     `import { BaseCommand } from "./BaseCommand"
@@ -14,7 +14,7 @@ export class ${name}Command extends BaseCommand {
 }
 `
 
-const commandsPath = path.join(__dirname, '../src/commands')
+const commandsPath = path.join(__dirname, "../src/commands")
 
 const name = capitalize(process.argv[2])
 const newCommandPath = path.join(commandsPath, `${name}Command.ts`)

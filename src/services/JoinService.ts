@@ -3,9 +3,9 @@ import {
     joinVoiceChannel,
     VoiceConnection,
     VoiceConnectionStatus,
-} from '@discordjs/voice'
-import { Message } from 'discord.js'
-import { FriendlyError } from 'errors/FriendlyError'
+} from "@discordjs/voice"
+import { Message } from "discord.js"
+import { FriendlyError } from "errors/FriendlyError"
 
 export class JoinService {
     constructor(private message: Message) {
@@ -16,7 +16,7 @@ export class JoinService {
             const connection = this.joinVoice()
 
             if (!connection) {
-                return reject(new FriendlyError('User not in a voice channel'))
+                return reject(new FriendlyError("User not in a voice channel"))
             }
 
             if (connection.state.status === VoiceConnectionStatus.Ready) {
@@ -27,7 +27,7 @@ export class JoinService {
                 resolve(connection)
             })
 
-            setTimeout(() => reject(new FriendlyError('Joining timeout')), 10_000)
+            setTimeout(() => reject(new FriendlyError("Joining timeout")), 10_000)
         })
     }
 

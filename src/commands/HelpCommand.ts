@@ -1,9 +1,9 @@
-import { BaseCommand } from './BaseCommand'
-import { routes } from 'routes'
+import { BaseCommand } from "./BaseCommand"
+import { routes } from "routes"
 
 
 export class HelpCommand extends BaseCommand {
-    static description = 'Help yourself'
+    static description = "Help yourself"
 
     action() {
         if (this.args.length === 0) {
@@ -14,7 +14,7 @@ export class HelpCommand extends BaseCommand {
     }
 
     private static formatRoutes(routes: string[]) {
-        return `\`${routes.join('` `')}\``
+        return `\`${routes.join("` `")}\``
     }
 
     private static getDescription(route: string) {

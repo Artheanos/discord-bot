@@ -1,4 +1,4 @@
-import { Collection, Message, Role, Snowflake } from 'discord.js'
+import { Collection, Message, Role, Snowflake } from "discord.js"
 
 export class UserScope {
     roleIds?: string[]

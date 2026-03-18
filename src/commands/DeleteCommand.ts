@@ -1,7 +1,7 @@
-import { BaseCommand } from './BaseCommand'
+import { BaseCommand } from "./BaseCommand"
 
 export class DeleteCommand extends BaseCommand {
-    static description = 'Deletes as many messages as you\'d like'
+    static description = "Deletes as many messages as you'd like"
     static minArgsLength = 1
 
     static MAX_MESSAGE_COUNT = 50

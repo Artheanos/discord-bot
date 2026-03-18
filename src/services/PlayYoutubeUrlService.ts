@@ -1,10 +1,10 @@
-import { Message } from 'discord.js'
+import { Message } from "discord.js"
 
-import { getTitle, search, stream } from 'lib/yt-dlp'
-import { isValidURL } from 'utils/strings'
-import { JoinService } from './JoinService'
-import { QueuedTrack } from 'lib/guildStorage/types'
-import { EnqueueTrackService } from 'services/EnqueueTrackService'
+import { getTitle, search, stream } from "lib/yt-dlp"
+import { isValidURL } from "utils/strings"
+import { JoinService } from "./JoinService"
+import { QueuedTrack } from "lib/guildStorage/types"
+import { EnqueueTrackService } from "services/EnqueueTrackService"
 
 export class PlayYoutubeUrlService {
     constructor(private message: Message<true>, private track: string) {
@@ -21,7 +21,7 @@ export class PlayYoutubeUrlService {
 
     private enqueueTrack(): void {
         Promise.all([
-            this.message.channel.send('Downloading'),
+            this.message.channel.send("Downloading"),
             this.getVideoInfo(),
         ]).then(([responseMessage, videoInfo]) => {
             new EnqueueTrackService(this.message, videoInfo, responseMessage).call()

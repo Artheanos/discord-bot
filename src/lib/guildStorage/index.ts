@@ -1,1 +1,1 @@
-export * from './GuildExtensionsManager'
+export * from "./GuildExtensionsManager"

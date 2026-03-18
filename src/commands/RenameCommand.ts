@@ -1,9 +1,9 @@
-import { BaseCommand } from './BaseCommand'
-import { SavedTrack } from '@prisma/client'
-import { prisma } from 'initializers/prisma'
+import { BaseCommand } from "./BaseCommand"
+import { SavedTrack } from "@prisma/client"
+import { prisma } from "initializers/prisma"
 
 export class RenameCommand extends BaseCommand {
-    static description = 'Change the name of your saved track'
+    static description = "Change the name of your saved track"
     static minArgsLength = 2
 
     async action() {

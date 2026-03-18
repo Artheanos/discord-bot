@@ -1,5 +1,5 @@
-import { AudioPlayerWrapper } from './AudioPlayerWrapper'
-import { TrackScheduler } from './TrackScheduler'
+import { AudioPlayerWrapper } from "./AudioPlayerWrapper"
+import { TrackScheduler } from "./TrackScheduler"
 
 export class GuildExtension {
     readonly playerWrapper: AudioPlayerWrapper

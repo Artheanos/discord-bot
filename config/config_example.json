@@ -1,22 +1,20 @@
 {
-  "prefix": "$",
-  "token": "1234",
-  "ownerId": "4321",
-  "caseSensitive": false,
-  "unknownCommandMessage": true,
-  "defaultPresence": {
-    "activity": {
-      "name": "Hello World"
+    "prefix": "$",
+    "token": "1234",
+    "ownerId": "4321",
+    "caseSensitive": false,
+    "defaultPresence": {
+        "activity": {
+            "name": "Hello World"
+        },
+        "status": "online"
     },
-    "status": "online"
-  },
-  "censorList": {
-    "467684738497511424": {
-      "*": [
-        "(.)(\\1){6}",
-        "bad_word"
-      ],
-      "533291339115266059": []
-    }
-  }
+    "censorList": {
+        "467684738497511424": {
+            "*": ["(.)(\\1){6}", "bad_word"],
+            "533291339115266059": []
+        }
+    },
+    "dbUrl": "file:../data/dev.db",
+    "openAiKey": "567j8"
 }

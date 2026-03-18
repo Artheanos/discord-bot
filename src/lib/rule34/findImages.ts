@@ -1,8 +1,8 @@
-import axios from 'axios'
-import { URLSearchParams } from 'url'
+import axios from "axios"
+import { URLSearchParams } from "url"
 
 export const findImages = async (query: string): Promise<string[]> => {
-    query = query.split(' ').filter(Boolean).join('_')
+    query = query.split(" ").filter(Boolean).join("_")
 
     const response = await axios.get(urlBuilder(query))
     const rule34Items: Rule34Item[] = response.data || []
@@ -11,10 +11,10 @@ export const findImages = async (query: string): Promise<string[]> => {
 
 const urlBuilder = (tags: string, pageId = 0): string => {
     const searchParams = new URLSearchParams({
-        page: 'dapi',
-        s: 'post',
-        q: 'index',
-        json: '1',
+        page: "dapi",
+        s: "post",
+        q: "index",
+        json: "1",
         tags: tags,
         pid: pageId.toString(),
     })

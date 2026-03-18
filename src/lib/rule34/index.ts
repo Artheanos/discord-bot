@@ -1,1 +1,1 @@
-export { findImages } from './findImages'
+export { findImages } from "./findImages"

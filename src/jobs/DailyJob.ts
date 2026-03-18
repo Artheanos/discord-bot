@@ -1,4 +1,4 @@
-import { BaseJob } from 'jobs/BaseJob'
+import { BaseJob } from "jobs/BaseJob"
 
 export class DailyJob extends BaseJob {
     async execute(): Promise<unknown> {

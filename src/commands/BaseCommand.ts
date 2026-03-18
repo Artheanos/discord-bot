@@ -1,17 +1,17 @@
-import { Client, Guild, TextChannel } from 'discord.js'
+import { Client, Guild, TextChannel } from "discord.js"
 
-import config from 'config'
-import { awaitIfPromise } from 'utils/async'
-import { BaseValidator } from 'validators/BaseValidator'
-import { GuildExtensionsManager } from 'lib/guildStorage'
-import { TextChannelMessage } from 'interfaces/TextChannelMessage'
-import { UserScope } from 'UserScope'
+import config from "config"
+import { awaitIfPromise } from "utils/async"
+import { BaseValidator } from "validators/BaseValidator"
+import { GuildExtensionsManager } from "lib/guildStorage"
+import { TextChannelMessage } from "interfaces/TextChannelMessage"
+import { UserScope } from "UserScope"
 
 export abstract class BaseCommand {
     async perform() {
         const validationResult = this.validate()
 
-        if (typeof validationResult === 'string') {
+        if (typeof validationResult === "string") {
             this.reply(validationResult)
             return
         }
@@ -40,7 +40,7 @@ export abstract class BaseCommand {
 
     constructor(message: TextChannelMessage, protected client: Client) {
         this.message = message
-        this.args = message.content.split(' ').slice(1)
+        this.args = message.content.split(" ").slice(1)
         this.channel = message.channel
         this.guild = message.guild
     }
@@ -55,16 +55,16 @@ export abstract class BaseCommand {
         const { minArgsLength, blacklist, whitelist, ownerOnly, validator } = this.klass
 
         if (minArgsLength && this.args.length < minArgsLength) {
-            return 'Wrong number of args'
+            return "Wrong number of args"
         }
         if (blacklist?.includes(this.message)) {
-            return 'You are in the blacklist'
+            return "You are in the blacklist"
         }
         if (whitelist?.includes(this.message)) {
-            return 'You are not in the whitelist'
+            return "You are not in the whitelist"
         }
         if (ownerOnly && this.message.author.id !== config.ownerId) {
-            return 'Owner only'
+            return "Owner only"
         }
         if (validator) {
             const validatorResult = new validator(this).call()

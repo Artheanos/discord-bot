@@ -1,9 +1,9 @@
-import { Message } from 'discord.js'
-import { spawn } from 'child_process'
+import { Message } from "discord.js"
+import { spawn } from "child_process"
 
-import { EnqueueTrackService } from 'services/EnqueueTrackService'
-import { JoinService } from './JoinService'
-import { Readable } from 'stream'
+import { EnqueueTrackService } from "services/EnqueueTrackService"
+import { JoinService } from "./JoinService"
+import { Readable } from "stream"
 
 export class PlayUrlService {
     constructor(private message: Message<true>, private track: VideoResult) {
@@ -27,6 +27,6 @@ export class PlayUrlService {
     }
 
     private createStream(): Readable {
-        return spawn('curl', [this.track.url, '-o', '-']).stdout
+        return spawn("curl", [this.track.url, "-o", "-"]).stdout
     }
 }

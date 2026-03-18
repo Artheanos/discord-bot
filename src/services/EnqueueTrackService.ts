@@ -1,6 +1,6 @@
-import { GuildExtensionsManager } from 'lib/guildStorage'
-import { QueuedTrack } from 'lib/guildStorage/types'
-import { Message } from 'discord.js'
+import { GuildExtensionsManager } from "lib/guildStorage"
+import { QueuedTrack } from "lib/guildStorage/types"
+import { Message } from "discord.js"
 
 export class EnqueueTrackService {
     constructor(private message: Message<true>, private track: QueuedTrack, private infoMessage?: Message) {

@@ -1,4 +1,4 @@
-import { Message, SendableChannels } from 'discord.js'
+import { Message, SendableChannels } from "discord.js"
 
 export async function tmpSend(channel: SendableChannels, messageContent: string, deleteAfter: number) {
     const msg = await channel.send(messageContent)

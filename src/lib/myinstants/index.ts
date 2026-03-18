@@ -1,5 +1,5 @@
-import axios, { isAxiosError } from 'axios'
-import { URLSearchParams } from 'url'
+import axios, { isAxiosError } from "axios"
+import { URLSearchParams } from "url"
 
 export const findMp3Paths = async (query: string): Promise<string[]> => {
     try {
@@ -16,7 +16,7 @@ export const findMp3Paths = async (query: string): Promise<string[]> => {
 
 export const getMediaUrl = (media: string) => `${BASE_URL}${media}`
 
-export const BASE_URL = 'https://www.myinstants.com'
+export const BASE_URL = "https://www.myinstants.com"
 
 const findMediaInHtml = (html: string): string[] => {
     return [...html.matchAll(REGEX)].map(i => i[1])

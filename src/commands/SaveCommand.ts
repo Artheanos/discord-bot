@@ -1,9 +1,9 @@
-import { BaseCommand } from './BaseCommand'
-import { SaveValidator } from 'validators/SaveValidator'
-import { prisma } from 'initializers/prisma'
+import { BaseCommand } from "./BaseCommand"
+import { SaveValidator } from "validators/SaveValidator"
+import { prisma } from "initializers/prisma"
 
 export class SaveCommand extends BaseCommand {
-    static description = 'Save an audio file with a tag for easy access'
+    static description = "Save an audio file with a tag for easy access"
     static minArgsLength = 1
     static validator = SaveValidator
 

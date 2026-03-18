@@ -1,13 +1,13 @@
-import { Formatters } from 'discord.js'
+import { Formatters } from "discord.js"
 
-import { BaseCommand } from './BaseCommand'
-import { enumerateArray } from 'utils/arrays'
-import { PlayYoutubeUrlService } from 'services/PlayYoutubeUrlService'
-import { search } from 'lib/yt-dlp'
-import { waitForNumberReaction } from 'services/waitForNumberReaction'
+import { BaseCommand } from "./BaseCommand"
+import { enumerateArray } from "utils/arrays"
+import { PlayYoutubeUrlService } from "services/PlayYoutubeUrlService"
+import { search } from "lib/yt-dlp"
+import { waitForNumberReaction } from "services/waitForNumberReaction"
 
 export class SearchCommand extends BaseCommand {
-    static description = 'Search for youtube videos and choose one of them'
+    static description = "Search for youtube videos and choose one of them"
     static minArgsLength = 1
 
     async action() {
@@ -18,7 +18,7 @@ export class SearchCommand extends BaseCommand {
     }
 
     private async getVideoFromUser() {
-        const videos = await search(this.args.join(' '), 5)
+        const videos = await search(this.args.join(" "), 5)
         const videoListMessage = await this.reply(Formatters.codeBlock(enumerateArray(videos.map(v => v.title))))
         const userResponse = await waitForNumberReaction(videoListMessage, this.message.author.id)
         const videoIndex = Number(userResponse) - 1
