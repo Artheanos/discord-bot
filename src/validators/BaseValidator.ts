@@ -1,4 +1,4 @@
-import { BaseCommand } from "commands/BaseCommand"
+import { BaseCommand } from "commands/BaseCommand";
 
 export abstract class BaseValidator {
     constructor(protected command: BaseCommand) {

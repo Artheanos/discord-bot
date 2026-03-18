@@ -1,9 +1,9 @@
 // ESLint v10+ flat config
 // https://eslint.org/docs/latest/use/configure/configuration-files-new
-const tsParser = require("@typescript-eslint/parser")
-const tsPlugin = require("@typescript-eslint/eslint-plugin")
-const jestPlugin = require("eslint-plugin-jest")
-const globals = require("globals")
+const tsParser = require("@typescript-eslint/parser");
+const tsPlugin = require("@typescript-eslint/eslint-plugin");
+const jestPlugin = require("eslint-plugin-jest");
+const globals = require("globals");
 
 module.exports = [
     // Global ignores (replaces ignorePatterns)
@@ -41,7 +41,7 @@ module.exports = [
             "object-curly-spacing": ["error", "always"],
             "prefer-const": "error",
             quotes: ["error", "double"],
-            semi: ["error", "never"],
+            semi: ["error", "always"],
             "space-before-function-paren": [
                 "error",
                 {
@@ -52,4 +52,4 @@ module.exports = [
             ],
         },
     },
-]
+];

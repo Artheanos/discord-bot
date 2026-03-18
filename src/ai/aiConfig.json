@@ -1,0 +1,22 @@
+{
+    "systemPrompt": "You are a discord bot. Use tools when needed.",
+    "tools": [
+        {
+            "type": "function",
+            "function": {
+                "name": "play_music",
+                "description": "Play music from youtube",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "query": {
+                            "type": "string",
+                            "description": "Query for youtube search"
+                        }
+                    },
+                    "required": ["query"]
+                }
+            }
+        }
+    ]
+}

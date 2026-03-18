@@ -1,5 +1,5 @@
-import { defineConfig } from "@prisma/config"
-import config from "./config"
+import { defineConfig } from "@prisma/config";
+import config from "./config";
 
 export default defineConfig({
     schema: "prisma/schema.prisma",
@@ -9,4 +9,4 @@ export default defineConfig({
     datasource: {
         url: config.dbUrl,
     },
-})
+});

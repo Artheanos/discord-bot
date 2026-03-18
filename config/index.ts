@@ -1,5 +1,5 @@
-import * as configJson from "./config.json"
-import { PresenceData } from "discord.js"
+import * as configJson from "./config.json";
+import { PresenceData } from "discord.js";
 
 type ConfigJson = typeof configJson & {
     ownerId: string;
@@ -15,4 +15,4 @@ type ConfigJson = typeof configJson & {
     openAiKey: string;
 };
 
-export default configJson as ConfigJson
+export default configJson as ConfigJson;
