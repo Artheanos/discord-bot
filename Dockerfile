@@ -1,11 +1,10 @@
-FROM node:20.9.0
+FROM node:25.4.0
 
 WORKDIR /app/
 
 # install yt-dlp
-RUN apt update -y
-RUN apt install python3-pip -y
-RUN python3 -m pip install --no-deps --break-system-packages -U yt-dlp
+RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
+RUN chmod a+rx /usr/local/bin/yt-dlp
 
 COPY ./package.json ./package-lock.json /app/
 RUN npm i
