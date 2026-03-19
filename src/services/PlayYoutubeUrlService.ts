@@ -7,8 +7,10 @@ import { QueuedTrack } from "lib/guildStorage/types";
 import { EnqueueTrackService } from "services/EnqueueTrackService";
 
 export class PlayYoutubeUrlService {
-    constructor(private message: Message<true>, private track: string) {
-    }
+    constructor(
+        private message: Message<true>,
+        private track: string,
+    ) {}
 
     async call(): Promise<void> {
         try {
@@ -24,15 +26,21 @@ export class PlayYoutubeUrlService {
             this.message.channel.send("Downloading"),
             this.getVideoInfo(),
         ]).then(([responseMessage, videoInfo]) => {
-            new EnqueueTrackService(this.message, videoInfo, responseMessage).call();
+            new EnqueueTrackService(
+                this.message,
+                videoInfo,
+                responseMessage,
+            ).call();
         });
     }
 
     private async getVideoInfo(): Promise<QueuedTrack> {
-        const video = isValidURL(this.track) ? {
-            url: this.track,
-            title: await getTitle(this.track),
-        } : await this.getFirstResultFromYoutube();
+        const video = isValidURL(this.track)
+            ? {
+                  url: this.track,
+                  title: await getTitle(this.track),
+              }
+            : await this.getFirstResultFromYoutube();
 
         return { ...video, stream: stream(video.url) };
     }
