@@ -1,23 +1,6 @@
 {
-    "systemPrompt": "You are a discord bot. Use tools when needed.",
+    "systemPrompt": "You are a discord bot. Your responses must be less than 2000 characters. Use tools when needed.",
     "tools": [
-        {
-            "type": "function",
-            "function": {
-                "name": "eval",
-                "description": "evaluate js code",
-                "parameters": {
-                    "type": "object",
-                    "properties": {
-                        "code": {
-                            "type": "string",
-                            "description": "The js code to evaluate"
-                        }
-                    },
-                    "required": []
-                }
-            }
-        },
         {
             "type": "function",
             "function": {
