@@ -2,7 +2,6 @@
 // https://eslint.org/docs/latest/use/configure/configuration-files-new
 const tsParser = require("@typescript-eslint/parser");
 const tsPlugin = require("@typescript-eslint/eslint-plugin");
-const jestPlugin = require("eslint-plugin-jest");
 const globals = require("globals");
 
 module.exports = [
@@ -29,7 +28,6 @@ module.exports = [
 
         plugins: {
             "@typescript-eslint": tsPlugin,
-            jest: jestPlugin,
         },
 
         rules: {

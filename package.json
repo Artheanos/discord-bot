@@ -9,7 +9,7 @@
         "lint": "eslint src/**/*.[tj]s",
         "start": "node dist/src/initializers/app.js",
         "types": "tsc --noEmit",
-        "test": "jest"
+        "test": "node --import=tsx --test"
     },
     "repository": {
         "type": "git",
@@ -26,8 +26,6 @@
         "@discordjs/voice": "^0.19.2",
         "@prisma/adapter-better-sqlite3": "^7.5.0",
         "@prisma/client": "^7.5.0",
-        "@types/jest": "^30.0.0",
-        "@types/node": "^25.5.0",
         "@types/node-cron": "^3.0.11",
         "@types/ws": "^8.18.1",
         "@typescript-eslint/eslint-plugin": "^8.57.1",
@@ -36,13 +34,11 @@
         "discord.js": "^14.25.1",
         "eslint": "^10.0.3",
         "eslint-plugin-jest": "^29.15.0",
-        "jest": "^30.3.0",
         "libsodium-wrappers": "^0.8.2",
         "module-alias": "^2.3.4",
         "node-cron": "^4.2.1",
         "openai": "^6.32.0",
         "prisma": "^7.5.0",
-        "ts-jest": "^29.4.6",
         "typescript": "^5.9.3"
     },
     "_moduleAliases": {
@@ -51,27 +47,12 @@
     "_moduleDirectories": [
         "dist/src"
     ],
-    "jest": {
-        "testEnvironment": "node",
-        "transform": {
-            ".(ts|tsx)": "ts-jest"
-        },
-        "testRegex": "(/test/.*\\.(test|spec))\\.(ts|tsx|js)$",
-        "moduleFileExtensions": [
-            "ts",
-            "tsx",
-            "js"
-        ],
-        "moduleDirectories": [
-            "node_modules",
-            "src",
-            "config"
-        ]
-    },
     "eslintIgnore": [
         "node_modules"
     ],
     "devDependencies": {
-        "globals": "^17.4.0"
+        "@types/node": "^25.5.0",
+        "globals": "^17.4.0",
+        "tsx": "^4.21.0"
     }
 }

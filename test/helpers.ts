@@ -13,4 +13,20 @@ export class ReadableMock {
         this._listeners[event] = listener;
         return this;
     }
+
+    emitData(buffer: string): void {
+        const listener = this._listeners["data"];
+        if (typeof listener !== "function") {
+            throw new TypeError('ReadableMock: no "data" listener registered');
+        }
+        (listener as (buffer: string) => void)(buffer);
+    }
+
+    emitClose(): void {
+        const listener = this._listeners["close"];
+        if (typeof listener !== "function") {
+            throw new TypeError('ReadableMock: no "close" listener registered');
+        }
+        (listener as () => void)();
+    }
 }
