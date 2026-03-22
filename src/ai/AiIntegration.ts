@@ -6,10 +6,12 @@ import {
     ChatCompletionMessage,
     ChatCompletionMessageFunctionToolCall,
     ChatCompletionMessageParam,
+    ChatCompletionMessageToolCall,
     ChatCompletionTool,
 } from "openai/resources/index";
 import { PlayYoutubeUrlService } from "services/PlayYoutubeUrlService";
-import * as aiConfig from "./aiConfig.json";
+import aiConfig from "./aiConfig";
+import { mergeObjects } from "utils/objects";
 
 export class AiIntegration {
     private conversations: Record<Snowflake, ChatCompletionMessageParam[]> = {};
@@ -21,19 +23,37 @@ export class AiIntegration {
         const userInput =
             overrideContent ?? message.content.slice(config.prefix.length);
         if (userInput.trim() === "") return;
-        const discordResponse = await message.channel.send("Thinking...");
 
+        const discordResponse = await message.channel.send("Thinking...");
+        let discordResponseEditedAt = 0;
         const conversation = this.getOrCreateConversation(message.channel.id);
         conversation.push({ role: "user", content: userInput });
+
         while (true) {
+            const aiMessage = {} as ChatCompletionMessage;
+
             const response = await this.createAiCompletion(conversation);
-            const aiMessage = response.choices[0].message;
+            for await (const chunk of response) {
+                const delta = chunk.choices[0].delta;
+                mergeObjects(aiMessage, delta);
+                if (
+                    delta.content &&
+                    discordResponseEditedAt < Date.now() - 600
+                ) {
+                    discordResponseEditedAt = Date.now();
+                    await discordResponse.edit(aiMessage.content!);
+                }
+            }
             conversation.push(aiMessage);
 
             if (aiMessage.tool_calls) {
-                await this.handleToolCalls(aiMessage, conversation, message);
+                await this.handleToolCalls(
+                    aiMessage.tool_calls,
+                    conversation,
+                    message,
+                );
             } else {
-                discordResponse.edit(aiMessage.content!);
+                await discordResponse.edit(aiMessage.content!);
                 return;
             }
         }
@@ -44,6 +64,7 @@ export class AiIntegration {
             model: "gpt-5",
             messages: conversation,
             tools: aiConfig.tools as ChatCompletionTool[],
+            stream: true,
         });
     }
 
@@ -62,11 +83,11 @@ export class AiIntegration {
     }
 
     private async handleToolCalls(
-        aiMessage: ChatCompletionMessage,
+        toolCalls: ChatCompletionMessageToolCall[],
         conversation: ChatCompletionMessageParam[],
         message: TextChannelMessage,
     ) {
-        for (const toolCall of aiMessage.tool_calls as ChatCompletionMessageFunctionToolCall[]) {
+        for (const toolCall of toolCalls as ChatCompletionMessageFunctionToolCall[]) {
             const { name, arguments: args } = toolCall.function;
             const addMessage = (content: string) => {
                 conversation.push({
