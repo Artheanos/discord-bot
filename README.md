@@ -5,9 +5,9 @@
 ### Native
 
 * Install [yt-dlp](https://github.com/yt-dlp/yt-dlp)
-* Install dependencies - run `yarn` while in the project's folder
-* Compile js - `yarn build`
-* Run it! - `yarn start`
+* Install dependencies - run `npm i` while in the project's folder
+* Compile js - `npm run build`
+* Run it! - `npm run start`
 
 #### The bot should be running now
 
