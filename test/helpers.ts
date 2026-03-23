@@ -17,7 +17,7 @@ export class ReadableMock {
     emitData(buffer: string): void {
         const listener = this._listeners["data"];
         if (typeof listener !== "function") {
-            throw new TypeError('ReadableMock: no "data" listener registered');
+            throw new TypeError("ReadableMock: no \"data\" listener registered");
         }
         (listener as (buffer: string) => void)(buffer);
     }
@@ -25,7 +25,7 @@ export class ReadableMock {
     emitClose(): void {
         const listener = this._listeners["close"];
         if (typeof listener !== "function") {
-            throw new TypeError('ReadableMock: no "close" listener registered');
+            throw new TypeError("ReadableMock: no \"close\" listener registered");
         }
         (listener as () => void)();
     }

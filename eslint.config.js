@@ -31,8 +31,6 @@ module.exports = [
         },
 
         rules: {
-            // This rule was removed/renamed in recent @typescript-eslint versions.
-            // "@typescript-eslint/no-extra-parens": "error",
             "comma-dangle": ["error", "always-multiline"],
             indent: ["error", 4],
             "keyword-spacing": ["error", { before: true }],

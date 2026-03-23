@@ -1,4 +1,5 @@
 import config from "config";
+import aiInfo from "./info";
 import { Snowflake } from "discord.js";
 import { openAiClient } from "initializers/openai";
 import { TextChannelMessage } from "interfaces/TextChannelMessage";
@@ -10,7 +11,6 @@ import {
     ChatCompletionTool,
 } from "openai/resources/index";
 import { PlayYoutubeUrlService } from "services/PlayYoutubeUrlService";
-import aiConfig from "./aiConfig";
 import { mergeObjects } from "utils/objects";
 
 export class AiIntegration {
@@ -27,7 +27,10 @@ export class AiIntegration {
         const discordResponse = await message.channel.send("Thinking...");
         let discordResponseEditedAt = 0;
         const conversation = this.getOrCreateConversation(message.channel.id);
-        conversation.push({ role: "user", content: userInput });
+        conversation.push({
+            role: "user",
+            content: `User(${message.author.username}):${userInput}`,
+        });
 
         while (true) {
             const aiMessage = {} as ChatCompletionMessage;
@@ -53,7 +56,11 @@ export class AiIntegration {
                     message,
                 );
             } else {
-                await discordResponse.edit(aiMessage.content!);
+                if (aiMessage.content) {
+                    await discordResponse.edit(aiMessage.content!);
+                } else {
+                    await discordResponse.delete();
+                }
                 return;
             }
         }
@@ -61,9 +68,9 @@ export class AiIntegration {
 
     private createAiCompletion(conversation: ChatCompletionMessageParam[]) {
         return openAiClient.chat.completions.create({
-            model: "gpt-5",
+            model: config.ai.model,
             messages: conversation,
-            tools: aiConfig.tools as ChatCompletionTool[],
+            tools: aiInfo.tools as ChatCompletionTool[],
             stream: true,
         });
     }
@@ -75,7 +82,7 @@ export class AiIntegration {
             this.conversations[sessionId] = [
                 {
                     role: "system",
-                    content: aiConfig.systemPrompt,
+                    content: aiInfo.systemPrompt,
                 },
             ];
         }

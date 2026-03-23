@@ -13,7 +13,7 @@ test("getTitle executes yt-dlp", async () => {
     const originalSpawn = childProcess.spawn;
 
     try {
-        // Capture call args for assertions
+    // Capture call args for assertions
         let calledCommand: string | undefined;
         let calledArgs: readonly string[] | undefined;
 
@@ -25,7 +25,7 @@ test("getTitle executes yt-dlp", async () => {
         });
 
         // Patch spawn
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
         (childProcess as any).spawn = ((
             command: string,
             args?: readonly string[],
@@ -34,7 +34,7 @@ test("getTitle executes yt-dlp", async () => {
             calledArgs = args;
 
             return { stdout };
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+       
         }) as any;
 
         // Import after patching spawn
@@ -59,8 +59,8 @@ test("getTitle executes yt-dlp", async () => {
             "title",
         ]);
     } finally {
-        // Restore spawn
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // Restore spawn
+     
         (childProcess as any).spawn = originalSpawn;
     }
 });

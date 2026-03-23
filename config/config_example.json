@@ -16,5 +16,9 @@
         }
     },
     "dbUrl": "file:../data/dev.db",
-    "openAiKey": "567j8"
+    "ai": {
+        "openAiKey": "567j8",
+        "baseURL": "https://api.openai.com/v1",
+        "model": "gpt-5.2"
+    }
 }

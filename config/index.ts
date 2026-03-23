@@ -12,7 +12,11 @@ type ConfigJson = typeof configJson & {
         };
     };
     dbUrl: string;
-    openAiKey: string;
+    ai: {
+        openAiKey: string;
+        baseURL: string;
+        model: string;
+    };
 };
 
 export default configJson as ConfigJson;
