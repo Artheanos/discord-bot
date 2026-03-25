@@ -4,7 +4,7 @@ import config from "config";
 import { awaitIfPromise } from "utils/async";
 import { BaseValidator } from "validators/BaseValidator";
 import { GuildExtensionsManager } from "lib/guildStorage";
-import { TextChannelMessage } from "interfaces/TextChannelMessage";
+import { GuildMessage } from "interfaces/discord";
 import { UserScope } from "UserScope";
 
 export abstract class BaseCommand {
@@ -33,26 +33,30 @@ export abstract class BaseCommand {
     protected static validator?: Type<BaseValidator>;
     protected static ownerOnly = false;
 
-    public message: TextChannelMessage;
+    public message: GuildMessage;
     public channel: TextChannel;
     public guild: Guild;
     public args: string[];
 
-    constructor(message: TextChannelMessage, protected client: Client) {
+    constructor(
+        message: GuildMessage,
+        protected client: Client,
+    ) {
         this.message = message;
         this.args = message.content.split(" ").slice(1);
         this.channel = message.channel;
         this.guild = message.guild;
     }
 
-    protected abstract action(): string | void | Promise<string | void>
+    protected abstract action(): string | void | Promise<string | void>;
 
     protected reply(content: string) {
         return this.message.channel.send(content);
     }
 
     protected validate(): string | undefined {
-        const { minArgsLength, blacklist, whitelist, ownerOnly, validator } = this.klass;
+        const { minArgsLength, blacklist, whitelist, ownerOnly, validator } =
+            this.klass;
 
         if (minArgsLength && this.args.length < minArgsLength) {
             return "Wrong number of args";

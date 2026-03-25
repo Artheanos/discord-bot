@@ -1,4 +1,6 @@
-export const tools = [
+import { ChatCompletionTool } from "openai/resources/index";
+
+const tools = [
     {
         type: "function",
         function: {
@@ -15,6 +17,7 @@ export const tools = [
                 required: ["query"],
             },
         },
+        onlyGuild: true,
     },
     {
         type: "function",
@@ -39,3 +42,15 @@ export const tools = [
         },
     },
 ];
+
+export const guildTools = tools.filter(
+    (tool) => tool.onlyGuild,
+) as ChatCompletionTool[];
+
+export const dmTools = tools.filter(
+    (tool) => !tool.onlyGuild,
+) as ChatCompletionTool[];
+
+for (let tool of tools) {
+    delete tool.onlyGuild;
+}

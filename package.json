@@ -4,7 +4,7 @@
     "description": "Simple discord bot",
     "main": "dist/index.js",
     "scripts": {
-        "build": "node_modules/.bin/tsc",
+        "build": "node_modules/.bin/tsc && cp -r src/ai/info/systemPrompt.md dist/src/ai/info/systemPrompt.md",
         "build-start": "npm run build && npm run start",
         "lint": "eslint src/**/*.[tj]s",
         "start": "node dist/src/initializers/app.js",

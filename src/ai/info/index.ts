@@ -1,11 +1,9 @@
 import { readFileSync } from "node:fs";
-import { tools } from "./tools";
-import path = require("node:path");
+import { dmTools, guildTools } from "./tools";
+import { join } from "node:path";
 
 export default {
-    systemPrompt: readFileSync(
-        path.join(__dirname, "systemPrompt.md"),
-        "utf-8",
-    ),
-    tools,
+    systemPrompt: readFileSync(join(__dirname, "systemPrompt.md"), "utf-8"),
+    tools: (options: { inGuild: boolean }) =>
+        options.inGuild ? guildTools : dmTools,
 };

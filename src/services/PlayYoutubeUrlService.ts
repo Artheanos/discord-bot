@@ -5,10 +5,11 @@ import { isValidURL } from "utils/strings";
 import { JoinService } from "./JoinService";
 import { QueuedTrack } from "lib/guildStorage/types";
 import { EnqueueTrackService } from "services/EnqueueTrackService";
+import { GuildMessage } from "interfaces/discord";
 
 export class PlayYoutubeUrlService {
     constructor(
-        private message: Message<true>,
+        private message: GuildMessage,
         private track: string,
     ) {}
 

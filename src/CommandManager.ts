@@ -3,33 +3,25 @@ import { Client, Message, SendableChannels } from "discord.js";
 import config from "config";
 import { FriendlyError } from "errors/FriendlyError";
 import { routes } from "routes";
-import { TextChannelMessage } from "interfaces/TextChannelMessage";
+import { GuildMessage } from "interfaces/discord";
 import { tmpSend } from "utils/discord";
 
 import { HelpCommand } from "commands/HelpCommand";
 import { BaseCommand } from "commands/BaseCommand";
-import { AiIntegration } from "ai/AiIntegration";
 
 // HelpCommand references `routes`, so it has to be added
 // after the `routes` have been initialized
 routes["help"] = HelpCommand;
-const aiIntegration = new AiIntegration();
 
 export class CommandManager {
     constructor(private client: Client) {}
 
-    processMessage(message: Message<true>) {
-        if (message.content.startsWith(config.aiPrefix)) {
-            // ai handling should not be here
-            aiIntegration.processMessage(message as TextChannelMessage);
-            return;
-        }
-
+    processMessage(message: GuildMessage) {
         if (message.content.startsWith(config.prefix)) {
             const commandName = CommandManager.resolveCommandName(message);
 
             if (commandName in routes) {
-                this.performCommand(commandName, message as TextChannelMessage);
+                this.performCommand(commandName, message);
             } else {
                 CommandManager.unknownCommandMessage(
                     message.channel,
@@ -39,9 +31,9 @@ export class CommandManager {
         }
     }
 
-    private performCommand(name: string, message: TextChannelMessage) {
+    private performCommand(name: string, message: GuildMessage) {
         const commandClass: Type<BaseCommand> = routes[name];
-        const commandProps = [message as TextChannelMessage, this.client];
+        const commandProps = [message as GuildMessage, this.client];
         const commandInstance: BaseCommand = new commandClass(...commandProps);
 
         commandInstance.perform().catch((e) => {
