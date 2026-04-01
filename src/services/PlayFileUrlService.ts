@@ -12,13 +12,8 @@ export class PlayFileUrlService {
     ) {}
 
     async call() {
-        try {
-            await new JoinService(this.message).call();
-            await this.enqueueTrack();
-        } catch (e: any) {
-            console.error(e);
-            this.message.channel.send(e.toString());
-        }
+        await new JoinService(this.message).call();
+        await this.enqueueTrack();
     }
 
     private async enqueueTrack() {

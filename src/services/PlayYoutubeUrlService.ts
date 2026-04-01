@@ -14,12 +14,8 @@ export class PlayYoutubeUrlService {
     ) {}
 
     async call(): Promise<void> {
-        try {
-            await new JoinService(this.message).call();
-            this.enqueueTrack();
-        } catch (e: any) {
-            this.message.channel.send(e.toString());
-        }
+        await new JoinService(this.message).call();
+        this.enqueueTrack();
     }
 
     private enqueueTrack(): void {

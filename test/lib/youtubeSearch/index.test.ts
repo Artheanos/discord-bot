@@ -1,5 +1,3 @@
-/// <reference types="node" />
-
 import test from "node:test";
 import assert from "node:assert/strict";
 import { Readable } from "node:stream";
@@ -35,8 +33,8 @@ test("search returns a list of videos", async () => {
     });
 
     try {
-    // Patch spawn BEFORE requiring the module under test.
-     
+        // Patch spawn BEFORE requiring the module under test.
+
         (childProcess as any).spawn = ((
             command: string,
             args?: readonly string[],
@@ -44,7 +42,6 @@ test("search returns a list of videos", async () => {
             calledCommand = command;
             calledArgs = args;
             return { stdout };
-       
         }) as any;
 
         // Clear require cache so the module re-evaluates and captures our patched spawn.
@@ -58,7 +55,7 @@ test("search returns a list of videos", async () => {
         delete require.cache[utilsPath];
 
         // Load after patching spawn + clearing cache.
-     
+
         const { search } =
             require("../../../src/lib/yt-dlp") as typeof import("../../../src/lib/yt-dlp");
 
@@ -89,8 +86,8 @@ test("search returns a list of videos", async () => {
             { url: "http://yt.com", title: "Movie" },
         ]);
     } finally {
-    // Restore spawn even if the test fails.
-     
+        // Restore spawn even if the test fails.
+
         (childProcess as any).spawn = originalSpawn;
     }
 });

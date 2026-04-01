@@ -1,4 +1,4 @@
-import { Formatters } from "discord.js";
+import { codeBlock } from "discord.js";
 
 import { BaseCommand } from "./BaseCommand";
 import { enumerateArray } from "utils/arrays";
@@ -19,8 +19,13 @@ export class SearchCommand extends BaseCommand {
 
     private async getVideoFromUser() {
         const videos = await search(this.args.join(" "), 5);
-        const videoListMessage = await this.reply(Formatters.codeBlock(enumerateArray(videos.map(v => v.title))));
-        const userResponse = await waitForNumberReaction(videoListMessage, this.message.author.id);
+        const videoListMessage = await this.reply(
+            codeBlock(enumerateArray(videos.map((v) => v.title))),
+        );
+        const userResponse = await waitForNumberReaction(
+            videoListMessage,
+            this.message.author.id,
+        );
         const videoIndex = Number(userResponse) - 1;
 
         if (isNaN(videoIndex)) {

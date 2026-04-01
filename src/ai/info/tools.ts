@@ -4,8 +4,28 @@ const tools = [
     {
         type: "function",
         function: {
-            name: "play_music",
-            description: "Play music from youtube",
+            name: "play_youtube",
+            description: "Play single audio from youtube",
+            parameters: {
+                type: "object",
+                properties: {
+                    query: {
+                        type: "string",
+                        description:
+                            "Query for youtube search or a youtube url",
+                    },
+                },
+                required: ["query"],
+            },
+        },
+        onlyGuild: true,
+    },
+    {
+        type: "function",
+        function: {
+            name: "search_youtube",
+            description:
+                "Search videos on youtube. Returns 20 results with only the video title and url.",
             parameters: {
                 type: "object",
                 properties: {

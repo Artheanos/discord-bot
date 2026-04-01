@@ -21,7 +21,17 @@ export class CommandManager {
             const commandName = CommandManager.resolveCommandName(message);
 
             if (commandName in routes) {
-                this.performCommand(commandName, message);
+                try {
+                    this.performCommand(commandName, message);
+                } catch (e) {
+                    if (e instanceof FriendlyError) {
+                        message.channel.send(e.toString());
+                    } else {
+                        const id = Math.random().toString(16).substring(2);
+                        console.error(id, e);
+                        message.channel.send("Unexpected error. ID: " + id);
+                    }
+                }
             } else {
                 CommandManager.unknownCommandMessage(
                     message.channel,

@@ -1,7 +1,7 @@
 import { BaseCommand } from "./BaseCommand";
 import * as myinstants from "lib/myinstants";
 import { PlayFileUrlService } from "services/PlayFileUrlService";
-import { choice } from "utils/random";
+import { randomItem } from "utils/random";
 
 export class MyInstantsCommand extends BaseCommand {
     static description = `Search for mp3s on ${myinstants.BASE_URL}`;
@@ -24,7 +24,7 @@ export class MyInstantsCommand extends BaseCommand {
         const mp3s = await myinstants.findMp3Paths(this.args.join(" "));
         if (mp3s.length === 0) return null;
 
-        const mp3Path = choice(mp3s);
+        const mp3Path = randomItem(mp3s);
 
         return {
             url: myinstants.getMediaUrl(mp3Path),

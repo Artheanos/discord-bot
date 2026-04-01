@@ -1,8 +1,10 @@
 import config from "config";
-import { Snowflake } from "discord.js";
+import { Message, Snowflake } from "discord.js";
 import { TextBasedMessage } from "interfaces/discord";
 import { AiCompletion } from "./AiCompletion";
 import { Conversation } from "./Conversation";
+import { emojis } from "lib/emojis";
+import { randomItem } from "utils/random";
 
 class AiDiscordIntegration {
     private conversations: Record<Snowflake, Conversation> = {};
@@ -11,7 +13,8 @@ class AiDiscordIntegration {
         const userInput = this.getUserInput(message);
         if (userInput === "") return;
 
-        const discordResponses = [await message.channel.send("Thinking...")];
+        const thinkingReaction = message.react(randomItem(emojis));
+        const discordResponses: Message[] = [];
         const conversation = this.getOrCreateConversation(message.channel.id);
         conversation.addUserMessage(message.author.username, userInput);
 
@@ -19,16 +22,19 @@ class AiDiscordIntegration {
             message,
             conversation,
             async (msgIndex, content) => {
-                discordResponses[msgIndex] ||=
-                    await message.channel.send("Thinking...");
-                if (content) {
-                    await discordResponses[msgIndex].edit(content);
-                } else {
-                    await discordResponses[msgIndex].delete();
+                if (discordResponses[msgIndex]) {
+                    await this.updateBotMessage(
+                        discordResponses[msgIndex],
+                        content,
+                    );
+                } else if (content) {
+                    discordResponses[msgIndex] =
+                        await message.channel.send(content);
                 }
             },
         );
         await aiCompletion.react();
+        thinkingReaction.then((reaction) => reaction.remove());
     }
 
     private getOrCreateConversation(sessionId: Snowflake): Conversation {
@@ -44,6 +50,17 @@ class AiDiscordIntegration {
             result = message.content;
         }
         return result.trim();
+    }
+
+    private async updateBotMessage(
+        msg: Message,
+        content: string | undefined,
+    ): Promise<unknown> {
+        if (content) {
+            return msg.edit(content);
+        } else {
+            return msg.delete();
+        }
     }
 }
 

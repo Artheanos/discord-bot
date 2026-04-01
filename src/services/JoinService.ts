@@ -8,27 +8,33 @@ import { Message } from "discord.js";
 import { FriendlyError } from "errors/FriendlyError";
 
 export class JoinService {
-    constructor(private message: Message) {
-    }
+    constructor(private message: Message) {}
 
     call(): Promise<VoiceConnection> {
-        return new Promise((resolve: (connection: VoiceConnection) => void, reject) => {
-            const connection = this.joinVoice();
+        return new Promise(
+            (resolve: (connection: VoiceConnection) => void, reject) => {
+                const connection = this.joinVoice();
 
-            if (!connection) {
-                return reject(new FriendlyError("User not in a voice channel"));
-            }
+                if (!connection) {
+                    return reject(
+                        new FriendlyError("User not in a voice channel"),
+                    );
+                }
 
-            if (connection.state.status === VoiceConnectionStatus.Ready) {
-                return resolve(connection);
-            }
+                if (connection.state.status === VoiceConnectionStatus.Ready) {
+                    return resolve(connection);
+                }
 
-            connection.on(VoiceConnectionStatus.Ready, () => {
-                resolve(connection);
-            });
+                connection.on(VoiceConnectionStatus.Ready, () => {
+                    resolve(connection);
+                });
 
-            setTimeout(() => reject(new FriendlyError("Joining timeout")), 10_000);
-        });
+                setTimeout(
+                    () => reject(new FriendlyError("Joining timeout")),
+                    5_000,
+                );
+            },
+        );
     }
 
     private joinVoice(): VoiceConnection | undefined {
@@ -40,7 +46,8 @@ export class JoinService {
         return joinVoiceChannel({
             channelId: voiceChannelId,
             guildId: guild!.id,
-            adapterCreator: guild!.voiceAdapterCreator as DiscordGatewayAdapterCreator,
+            adapterCreator: guild!
+                .voiceAdapterCreator as DiscordGatewayAdapterCreator,
         });
     }
 }
