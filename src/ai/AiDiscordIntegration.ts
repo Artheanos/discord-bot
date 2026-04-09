@@ -3,8 +3,8 @@ import { Message, Snowflake } from "discord.js";
 import { TextBasedMessage } from "interfaces/discord";
 import { AiCompletion } from "./AiCompletion";
 import { Conversation } from "./Conversation";
-import { emojis } from "lib/emojis";
-import { randomItem } from "utils/random";
+// import { emojis } from "lib/emojis";
+// import { randomItem } from "utils/random";
 
 class AiDiscordIntegration {
     private conversations: Record<Snowflake, Conversation> = {};
@@ -13,7 +13,7 @@ class AiDiscordIntegration {
         const userInput = this.getUserInput(message);
         if (userInput === "") return;
 
-        const thinkingReaction = message.react(randomItem(emojis));
+        // const thinkingReaction = message.react(randomItem(emojis));
         const discordResponses: Message[] = [];
         const conversation = this.getOrCreateConversation(message.channel.id);
         conversation.addUserMessage(message.author.username, userInput);
@@ -34,7 +34,7 @@ class AiDiscordIntegration {
             },
         );
         await aiCompletion.react();
-        thinkingReaction.then((reaction) => reaction.remove());
+        // thinkingReaction.then((reaction) => reaction.remove());
     }
 
     private getOrCreateConversation(sessionId: Snowflake): Conversation {
