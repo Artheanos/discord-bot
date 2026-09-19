@@ -1,8 +1,6 @@
-FROM node:24-alpine
+FROM node:24
 
 WORKDIR /app/
-
-RUN apk add --no-cache curl ca-certificates ffmpeg openssl bash
 
 # install yt-dlp
 RUN curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o /usr/local/bin/yt-dlp
