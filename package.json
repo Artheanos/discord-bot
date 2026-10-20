@@ -1,58 +1,58 @@
 {
-    "name": "my_bot_js",
-    "version": "1.0.0",
-    "description": "Simple discord bot",
-    "main": "dist/index.js",
-    "scripts": {
-        "build": "node_modules/.bin/tsc && cp -r src/ai/info/systemPrompt.md dist/src/ai/info/systemPrompt.md",
-        "build-start": "npm run build && npm run start",
-        "lint": "eslint src/**/*.[tj]s",
-        "start": "node dist/src/initializers/app.js",
-        "types": "tsc --noEmit",
-        "test": "node --import=tsx --test"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Artheanos/Simple-JS-Discord-Bot.git"
-    },
-    "author": "Jan Pieczul",
-    "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/Artheanos/Simple-JS-Discord-Bot/issues"
-    },
-    "homepage": "https://github.com/Artheanos/Simple-JS-Discord-Bot#readme",
-    "dependencies": {
-        "@discordjs/opus": "^0.10.0",
-        "@discordjs/voice": "^0.19.2",
-        "@prisma/adapter-better-sqlite3": "^7.5.0",
-        "@prisma/client": "^7.5.0",
-        "@types/node-cron": "^3.0.11",
-        "@types/ws": "^8.18.1",
-        "@typescript-eslint/eslint-plugin": "^8.57.1",
-        "@typescript-eslint/parser": "^8.57.1",
-        "axios": "^1.13.6",
-        "discord.js": "^14.25.1",
-        "eslint": "^10.0.3",
-        "eslint-plugin-jest": "^29.15.0",
-        "libsodium-wrappers": "^0.8.2",
-        "module-alias": "^2.3.4",
-        "node-cron": "^4.2.1",
-        "openai": "^6.32.0",
-        "prisma": "^7.5.0",
-        "typescript": "^5.9.3"
-    },
-    "_moduleAliases": {
-        "config": "dist/config"
-    },
-    "_moduleDirectories": [
-        "dist/src"
-    ],
-    "eslintIgnore": [
-        "node_modules"
-    ],
-    "devDependencies": {
-        "@types/node": "^25.5.0",
-        "globals": "^17.4.0",
-        "tsx": "^4.21.0"
-    }
+  "name": "my_bot_js",
+  "version": "1.0.0",
+  "description": "Simple discord bot",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "node_modules/.bin/tsc && cp -r src/ai/info/systemPrompt.md dist/src/ai/info/systemPrompt.md",
+    "build-start": "npm run build && npm run start",
+    "lint": "eslint src/**/*.[tj]s",
+    "start": "node dist/src/initializers/app.js",
+    "types": "tsc --noEmit",
+    "test": "node --import=tsx --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Artheanos/Simple-JS-Discord-Bot.git"
+  },
+  "author": "Jan Pieczul",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Artheanos/Simple-JS-Discord-Bot/issues"
+  },
+  "homepage": "https://github.com/Artheanos/Simple-JS-Discord-Bot#readme",
+  "dependencies": {
+    "@discordjs/opus": "^0.10.0",
+    "@discordjs/voice": "^0.19.2",
+    "@prisma/adapter-better-sqlite3": "^7.10.1",
+    "@prisma/client": "^7.10.1",
+    "@types/node-cron": "^3.0.11",
+    "@types/ws": "^8.18.2",
+    "@typescript-eslint/eslint-plugin": "^8.72.0",
+    "@typescript-eslint/parser": "^8.72.0",
+    "axios": "^1.20.0",
+    "discord.js": "^14.27.0",
+    "eslint": "^10.13.0",
+    "eslint-plugin-jest": "^29.17.0",
+    "libsodium-wrappers": "^0.8.4",
+    "module-alias": "^2.3.4",
+    "node-cron": "^4.6.0",
+    "openai": "^6.49.0",
+    "prisma": "^7.10.1",
+    "typescript": "^5.9.3"
+  },
+  "_moduleAliases": {
+    "config": "dist/config"
+  },
+  "_moduleDirectories": [
+    "dist/src"
+  ],
+  "eslintIgnore": [
+    "node_modules"
+  ],
+  "devDependencies": {
+    "@types/node": "^25.9.9",
+    "globals": "^17.13.0",
+    "tsx": "^4.23.15"
+  }
 }
